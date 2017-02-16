@@ -13,6 +13,9 @@
         $('.js-message-input').val('').focus();
     };
 
+    // enable console debug logs
+    $.connection.hub.logging = true;
+
     // Start the connection
     $.connection.hub.start().done(function () {
         $('.js-btn-send').click(function () {
