@@ -1,16 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 
 namespace Slacker.Hubs
 {
     public class ChatHub : Hub
     {
-        public void SendMessage(string username, string message)
+        public Task JoinGroup(string userName, string groupName)
         {
-            Clients.All.receiveMessage(username, message);
+            Clients.OthersInGroup(groupName).userJoinedChannel(userName);
+            return Groups.Add(Context.ConnectionId, groupName);
+        }
+
+        public Task LeaveGroup(string userName, string groupName)
+        {
+            Clients.OthersInGroup(groupName).userLeftChannel(userName);
+            return Groups.Remove(Context.ConnectionId, groupName);
+        }
+
+        public void SendMessage(string userName, string message)
+        {
+            Clients.All.receiveMessage(userName, message);
         }
     }
 }
