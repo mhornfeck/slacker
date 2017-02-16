@@ -11,7 +11,15 @@
     }
 
     $('.js-channel').click(function (e) {
-        var $target = $(e.currentTarget);
-        setUsername($target.text());
+        if ($('.js-username-input').val()) {
+            var $target = $(e.currentTarget);
+            setUsername($target.text());
+        }
+    });
+
+    $('.js-leave-channel').click(function () {
+        $('.js-login-container').toggleClass('hidden', false);
+        $('.js-chat-container').toggleClass('hidden', true);
+        $('.js-username-input').focus();
     });
 });

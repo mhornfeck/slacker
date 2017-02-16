@@ -21,10 +21,29 @@
         $('.js-message-input').val('').focus();
     };
 
+    var joinChannel = function () {
+        chat.server.joinChannel('@' + $('.js-username-input').val(), $('.js-channel-name-hidden').val());
+    };
+
+    var leaveChannel = function () {
+        chat.server.leaveChannel('@' + $('.js-username-input').val(), $('.js-channel-name-hidden').val());
+    };
+
     // Start the connection
     $.connection.hub.start().done(function () {
+        $('.js-channel').click(function () {
+            if ($('.js-username-input').val()) {
+                joinChannel();
+            }
+        });
+
         $('.js-btn-send').click(function () {
             sendChatMessage();
+        });
+
+        $('.js-leave-channel').click(function () {
+            $('.js-discussion-list').html('');
+            leaveChannel();
         });
 
         $('.js-message-input').keydown(function (event) {

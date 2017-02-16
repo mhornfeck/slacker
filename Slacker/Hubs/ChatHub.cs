@@ -5,13 +5,13 @@ namespace Slacker.Hubs
 {
     public class ChatHub : Hub
     {
-        public Task JoinGroup(string userName, string groupName)
+        public Task JoinChannel(string userName, string groupName)
         {
             Clients.OthersInGroup(groupName).userJoinedChannel(userName);
             return Groups.Add(Context.ConnectionId, groupName);
         }
 
-        public Task LeaveGroup(string userName, string groupName)
+        public Task LeaveChannel(string userName, string groupName)
         {
             Clients.OthersInGroup(groupName).userLeftChannel(userName);
             return Groups.Remove(Context.ConnectionId, groupName);
