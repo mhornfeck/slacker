@@ -3,6 +3,8 @@ using Microsoft.AspNet.SignalR;
 
 namespace Slacker.Hubs
 {
+    
+
     public class ChatHub : Hub
     {
         public Task JoinChannel(string userName, string groupName)
